@@ -1,0 +1,129 @@
+:root {
+  color-scheme: dark;
+  --surface-0: #0b1018;
+  --surface-1: #111927;
+  --surface-2: #182235;
+  --surface-3: #1f2d45;
+  --accent: #4da8ff;
+  --accent-soft: rgba(77, 168, 255, 0.18);
+  --text-primary: #eef5ff;
+  --text-secondary: rgba(238, 245, 255, 0.7);
+  --border: rgba(112, 160, 255, 0.25);
+  --danger: #ff6b6b;
+  --success: #42f59e;
+  --muted: rgba(255, 255, 255, 0.08);
+  --toolbar-height: 56px;
+  --timeline-height: 220px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #111c2d 0%, #070b11 40%);
+  color: var(--text-primary);
+  overscroll-behavior: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: var(--toolbar-height) 1fr var(--timeline-height);
+  grid-template-columns: 320px 1fr 360px;
+  grid-template-areas:
+    "toolbar toolbar toolbar"
+    "sidebar-left viewport sidebar-right"
+    "timeline timeline timeline";
+  gap: 1px;
+  background: var(--muted);
+  backdrop-filter: blur(16px);
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(27, 38, 59, 0.7), rgba(11, 15, 24, 0.9));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.scroll-y::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-y::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-y::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(77, 168, 255, 0.4));
+  border-radius: 999px;
+}
+
+@media (max-width: 1280px) {
+  .app-grid {
+    grid-template-columns: 260px 1fr 320px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --toolbar-height: 64px;
+    --timeline-height: 180px;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--toolbar-height) minmax(320px, 1fr) 360px minmax(280px, auto)
+      var(--timeline-height);
+    grid-template-areas:
+      "toolbar"
+      "viewport"
+      "sidebar-left"
+      "sidebar-right"
+      "timeline";
+    padding: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --timeline-height: 240px;
+  }
+}
